@@ -7,7 +7,7 @@ DO_VERSION     = '~> 0.10.15'
 DM_DO_ADAPTERS = %w[sqlite postgres mysql oracle sqlserver]
 GIT_BRANCH     = ENV.fetch('GIT_BRANCH', 'master')
 
-gem 'dm-core', DM_VERSION, github: 'datamapper/dm-core', branch: GIT_BRANCH
+gem 'dm-core', DM_VERSION, github: 'HR-Partner/dm-core', branch: GIT_BRANCH
 
 group :datamapper do
   adapters = ENV['ADAPTER'] || ENV['ADAPTERS']
@@ -15,7 +15,7 @@ group :datamapper do
 
   if (do_adapters = DM_DO_ADAPTERS & adapters).any?
     do_options = {}
-    do_options[:github] = 'datamapper/do' if ENV['DO_GIT'] == 'true'
+    do_options[:github] = 'HR-Partner/do' if ENV['DO_GIT'] == 'true'
 
     gem 'data_objects', DO_VERSION, do_options.dup
 
@@ -24,17 +24,17 @@ group :datamapper do
       gem "do_#{adapter}", DO_VERSION, do_options.dup
     end
 
-    gem 'dm-do-adapter', DM_VERSION, github: 'datamapper/dm-do-adapter', branch: GIT_BRANCH
+    gem 'dm-do-adapter', DM_VERSION, github: 'HR-Partner/dm-do-adapter', branch: GIT_BRANCH
   end
 
   adapters.each do |adapter|
-    gem "dm-#{adapter}-adapter", DM_VERSION, github: "datamapper/dm-#{adapter}-adapter", branch: GIT_BRANCH
+    gem "dm-#{adapter}-adapter", DM_VERSION, github: "HR-Partner/dm-#{adapter}-adapter", branch: GIT_BRANCH
   end
 
   plugins = ENV['PLUGINS'] || ENV['PLUGIN']
   plugins = plugins.to_s.tr(',', ' ').split
 
   plugins.each do |plugin|
-    gem plugin, DM_VERSION, github: "datamapper/#{plugin}", branch: GIT_BRANCH
+    gem plugin, DM_VERSION, github: "HR-Partner/#{plugin}", branch: GIT_BRANCH
   end
 end
